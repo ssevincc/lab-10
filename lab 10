@@ -1,0 +1,27 @@
+17)x**2+ln(x)−4=0 in the interval [1.0,2.0]
+
+import math
+def f(x):
+    return x**2 + math.log(x) - 4
+def df(x):
+    return 2*x + 1/x
+def newton_method(x0, tol=1e-6, max_iter=100):
+    iter_count = 0
+    while iter_count < max_iter:
+        fx = f(x0)
+        dfx = df(x0)
+        if dfx == 0:
+            print("Derivative is zero. Method fails.")
+            return None
+        x1 = x0 - fx / dfx
+        if abs(x1 - x0) < tol:
+            return x1  # Approximate root
+        x0 = x1
+        iter_count += 1
+
+    print("Method did not converge.")
+    return None
+x0 = 1.5
+
+root = newton_method(x0)
+print(f"Approximate root: {root}")
